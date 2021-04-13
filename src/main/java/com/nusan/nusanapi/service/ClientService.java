@@ -19,8 +19,4 @@ public class ClientService {
         return repository.save(client);
     }
 
-    public Client getAllClients(){
-        return (Client) repository.findAll();
-    }
-
 }

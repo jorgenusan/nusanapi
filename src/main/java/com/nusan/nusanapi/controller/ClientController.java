@@ -19,7 +19,7 @@ public class ClientController {
     private ClientService service;
 
     @RequestMapping(path = "/client", method = RequestMethod.POST)
-    public ResponseEntity<Client> postAClients(@RequestBody Client client){
+    public ResponseEntity<Client> createClients(@RequestBody Client client){
 
         Client reportCreated = service.create(client);
         return new ResponseEntity<>(reportCreated, HttpStatus.CREATED);

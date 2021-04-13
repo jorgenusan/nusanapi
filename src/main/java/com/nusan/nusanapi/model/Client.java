@@ -3,32 +3,39 @@ package com.nusan.nusanapi.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="client")
+@Table(name="clients")
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name="idClient")
     private Long id;
 
-    @Column(name="name")
+    @Column(name="name_cli")
     private String name;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "dni")
+    private String dni;
 
     @Column(name = "email")
     private String email;
 
+    @Column(name = "phone_number")
+    private Integer phoneNumber;
+
     @Column(name = "address")
     private String address;
 
-    @Column(name = "phoneNumber")
-    private Integer phoneNumber;
+    @Column(name="city")
+    private String city;
 
     @Override
     public String toString(){
-        return "Client [id="+id+"name="+name+"lastName="+lastName+"email="+email+"address="+address+"phoneNumber="+phoneNumber+"]";
+        return "Client [id="+id+"name="+name+"lastName="+lastName+"email="+email+
+                "dni="+dni+"phoneNumber="+phoneNumber+"city="+city+"address="+address+"]";
     }
 
     public Long getId(){
@@ -47,12 +54,20 @@ public class Client {
         return email;
     }
 
-    public String getAddress(){
-        return address;
+    public String getDni() {
+        return dni;
     }
 
     public Integer getPhoneNumber(){
         return phoneNumber;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getAddress(){
+        return address;
     }
 
     public void setId(Long id){
@@ -67,16 +82,24 @@ public class Client {
         this.lastName=lastName;
     }
 
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
     public void setEmail(String email){
         this.email=email;
     }
 
-    public void setAddress(String address){
-        this.address=address;
-    }
-
     public void setPhoneNumber(Integer phoneNumber){
         this.phoneNumber=phoneNumber;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAddress(String address){
+        this.address=address;
     }
 
 }
