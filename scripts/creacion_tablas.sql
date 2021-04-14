@@ -1,6 +1,6 @@
-use db_nusan;
+use nusan_db;
 CREATE TABLE IF NOT EXISTS clients(
-	idClient INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	id_client INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	name_cli varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
     dni VARCHAR(9) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS clients(
 	address varchar(255)
  );
  CREATE TABLE IF NOT EXISTS employees(
-	idEmployee INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id_employee INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	name_emp varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
     dni VARCHAR(9) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS clients(
     password_emp varchar(45) NOT NULL
   );
 CREATE TABLE IF NOT EXISTS reports(
-	idReport int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id_report int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	start_date date NOT NULL,
 	ending_date date,
     date_apointment date,
@@ -33,6 +33,6 @@ CREATE TABLE IF NOT EXISTS reports(
     payment_method enum('efectivo','tarjeta'),
     id_emp int NULL,
     id_cli int NOT NULL,
-    CONSTRAINT FK_EMP FOREIGN KEY (id_emp) REFERENCES employees (idEmployee),
-	CONSTRAINT FK_CLI FOREIGN KEY (id_cli) REFERENCES clients (idClient)
+    CONSTRAINT FK_EMP FOREIGN KEY (id_emp) REFERENCES employees (id_employee),
+	CONSTRAINT FK_CLI FOREIGN KEY (id_cli) REFERENCES clients (id_client)
 );
