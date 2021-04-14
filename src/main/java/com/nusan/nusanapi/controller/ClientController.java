@@ -21,12 +21,12 @@ public class ClientController {
     @RequestMapping(path = "/client", method = RequestMethod.POST)
     public ResponseEntity<Client> createClients(@RequestBody Client client){
 
-        Client reportCreated = service.create(client);
+        Client reportCreated = service.createClient(client);
         return new ResponseEntity<>(reportCreated, HttpStatus.CREATED);
     }
 
     @RequestMapping(path = "/client/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Client> geClientById(@PathVariable Long id){
+    public ResponseEntity<Client> geClientById(@PathVariable Integer id){
         return ResponseEntity.ok(service.getReportById(id));
     }
 

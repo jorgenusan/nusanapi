@@ -1,18 +1,20 @@
 package com.nusan.nusanapi.model;
 
+
+import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name="clients")
-public class Client {
+@Entity(name = "employees")
+public class Employees {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_client")
-    private Integer id;
+    @Column(name = "id_employee")
+    private Integer idEmployee;
 
-    @Column(name="name_cli")
-    private String name;
+    @Column(name = "name_emp")
+    private String nameEmp;
 
     @Column(name = "last_name")
     private String lastName;
@@ -26,40 +28,40 @@ public class Client {
     @Column(name = "phone_number")
     private Integer phoneNumber;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "status_emp")
+    private Integer statusEmp;
 
-    @Column(name="city")
-    private String city;
+    @Column(name = "password_emp")
+    private String passwordEmp;
 
     @Override
     public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+        return "Employees{" +
+                "idEmployee=" + idEmployee +
+                ", nameEmp='" + nameEmp + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dni='" + dni + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
+                ", statusEmp=" + statusEmp +
+                ", passwordEmp='" + passwordEmp + '\'' +
                 '}';
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdEmployee() {
+        return idEmployee;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdEmployee(Integer idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
-    public String getName() {
-        return name;
+    public String getNameEmp() {
+        return nameEmp;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameEmp(String nameEmp) {
+        this.nameEmp = nameEmp;
     }
 
     public String getLastName() {
@@ -94,32 +96,32 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getStatusEmp() {
+        return statusEmp;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStatusEmp(Integer statusEmp) {
+        this.statusEmp = statusEmp;
     }
 
-    public String getCity() {
-        return city;
+    public String getPasswordEmp() {
+        return passwordEmp;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPasswordEmp(String passwordEmp) {
+        this.passwordEmp = passwordEmp;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return id.equals(client.id);
+        Employees employees = (Employees) o;
+        return idEmployee.equals(employees.idEmployee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(idEmployee);
     }
 }

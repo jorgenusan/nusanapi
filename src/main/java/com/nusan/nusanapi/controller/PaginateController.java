@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -20,13 +21,13 @@ public class PaginateController {
     @Autowired
     private PaginateService service;
 
-    @RequestMapping(path = "/all1")
+    @RequestMapping(path = "/allClients", method = RequestMethod.GET)
     public ResponseEntity<List<Client>> getAllClients(@RequestBody Paginate paginate){
         List<Client> list = service.getAllClients(paginate.getNumPage(),paginate.getSizePage(), paginate.getSortBy(),paginate.isAscending());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/all2")
+    @RequestMapping(path = "/allReports", method = RequestMethod.GET)
     public ResponseEntity<List<Report>> getAllReports(@RequestBody Paginate paginate){
         List<Report> list = service.getAllReports(paginate.getNumPage(),paginate.getSizePage(), paginate.getSortBy(),paginate.isAscending());
         return new ResponseEntity<>(list, HttpStatus.OK);

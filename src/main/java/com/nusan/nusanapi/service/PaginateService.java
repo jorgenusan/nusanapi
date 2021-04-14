@@ -7,6 +7,7 @@ import com.nusan.nusanapi.repository.PagRepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class PaginateService {
     private PagRepRepository repositoryR;
 
     public List<Client> getAllClients(Integer numPage, Integer sizePage, String sort, boolean ascending){
-        PageRequest paging;
+        Pageable paging;
         if(ascending){
             paging = PageRequest.of(numPage,sizePage, Sort.by(sort));
         }else{

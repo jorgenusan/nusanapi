@@ -11,11 +11,11 @@ public class ClientService {
     @Autowired
     private ClientRepository repository;
 
-    public Client getReportById(Long id){
+    public Client getReportById(Integer id){
         return repository.findById(id).orElse(null);
     }
 
-    public Client create(Client client){
+    public Client createClient(Client client){
         return repository.save(client);
     }
 
