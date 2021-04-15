@@ -11,7 +11,7 @@ public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_employee")
-    private Integer idEmployee;
+    private Long idEmployee;
 
     @Column(name = "name_emp")
     private String nameEmp;
@@ -48,11 +48,11 @@ public class Employees {
                 '}';
     }
 
-    public Integer getIdEmployee() {
+    public Long getIdEmployee() {
         return idEmployee;
     }
 
-    public void setIdEmployee(Integer idEmployee) {
+    public void setIdEmployee(Long idEmployee) {
         this.idEmployee = idEmployee;
     }
 

@@ -21,13 +21,28 @@ public class ClientController {
     @RequestMapping(path = "/client", method = RequestMethod.POST)
     public ResponseEntity<Client> createClients(@RequestBody Client client){
 
-        Client reportCreated = service.createClient(client);
-        return new ResponseEntity<>(reportCreated, HttpStatus.CREATED);
+        if(!service.isDniUsed(client.getDni())){
+            Client reportCreated = service.createClient(client);
+            return new ResponseEntity<>(reportCreated, HttpStatus.CREATED);
+        }else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
     }
 
     @RequestMapping(path = "/client/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Client> geClientById(@PathVariable Integer id){
-        return ResponseEntity.ok(service.getReportById(id));
+    public ResponseEntity<Client> geClientById(@PathVariable Long id){
+        return ResponseEntity.ok(service.getClientById(id));
+    }
+
+    public ResponseEntity<Client> deleteClient(@PathVariable Long id){
+        if(!service.existsById(id)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            service.deleteClientById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+
     }
 
 }

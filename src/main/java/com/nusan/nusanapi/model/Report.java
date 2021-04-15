@@ -11,7 +11,7 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_report")
-    private Integer idReport;
+    private Long idReport;
 
     @Column(name="start_date")
     private Date startDate;
@@ -68,11 +68,11 @@ public class Report {
                 '}';
     }
 
-    public Integer getId() {
+    public Long getId() {
         return idReport;
     }
 
-    public void setId(Integer idReport) {
+    public void setId(Long idReport) {
         this.idReport = idReport;
     }
 

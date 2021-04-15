@@ -11,7 +11,7 @@ public class ClientService {
     @Autowired
     private ClientRepository repository;
 
-    public Client getReportById(Integer id){
+    public Client getClientById(Long id){
         return repository.findById(id).orElse(null);
     }
 
@@ -19,4 +19,9 @@ public class ClientService {
         return repository.save(client);
     }
 
+    public Boolean isDniUsed(String dni){return repository.existsByDni(dni);}
+
+    public void deleteClientById(Long id){ repository.deleteById(id);}
+
+    public boolean existsById(Long id){return repository.existsById(id);}
 }
