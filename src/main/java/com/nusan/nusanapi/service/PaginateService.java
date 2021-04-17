@@ -1,8 +1,10 @@
 package com.nusan.nusanapi.service;
 
 import com.nusan.nusanapi.model.Client;
+import com.nusan.nusanapi.model.Employees;
 import com.nusan.nusanapi.model.Report;
 import com.nusan.nusanapi.repository.PagCliRepository;
+import com.nusan.nusanapi.repository.PagEmpRepository;
 import com.nusan.nusanapi.repository.PagRepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,9 @@ public class PaginateService {
     @Autowired
     private PagRepRepository repositoryR;
 
+    @Autowired
+    private PagEmpRepository repositoryE;
+
     public List<Client> getAllClients(Integer numPage, Integer sizePage, String sort, boolean ascending){
         Pageable paging;
         if(ascending){
@@ -34,6 +39,22 @@ public class PaginateService {
 
         if(pagedClients.hasContent()){
             return pagedClients.getContent();
+        }else {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Employees> getAllEmployees(Integer numPage, Integer sizePage, String sort, boolean ascending){
+        PageRequest paging;
+        if(ascending){
+            paging = PageRequest.of(numPage,sizePage, Sort.by(sort));
+        }else{
+            paging = PageRequest.of(numPage,sizePage, Sort.by(sort).descending());
+        }
+        Page<Employees> pagedEmployees= repositoryE.findAll(paging);
+
+        if(pagedEmployees.hasContent()){
+            return pagedEmployees.getContent();
         }else {
             return new ArrayList<>();
         }

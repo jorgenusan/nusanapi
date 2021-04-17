@@ -26,11 +26,11 @@ public class Client {
     @Column(name = "phone_number")
     private Integer phoneNumber;
 
-    @Column(name = "address")
-    private String address;
-
     @Column(name="city")
     private String city;
+
+    @Column(name = "address")
+    private String address;
 
     @Override
     public String toString() {
@@ -41,8 +41,8 @@ public class Client {
                 ", dni='" + dni + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
-                ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 
@@ -94,20 +94,20 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

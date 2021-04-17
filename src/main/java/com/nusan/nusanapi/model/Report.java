@@ -11,7 +11,7 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_report")
-    private Long idReport;
+    private Long id;
 
     @Column(name="start_date")
     private Date startDate;
@@ -52,7 +52,7 @@ public class Report {
     @Override
     public String toString() {
         return "Report{" +
-                "idReport=" + idReport +
+                "idReport=" + id +
                 ", startDate=" + startDate +
                 ", endingDate=" + endingDate +
                 ", dateApointment=" + dateApointment +
@@ -69,11 +69,11 @@ public class Report {
     }
 
     public Long getId() {
-        return idReport;
+        return id;
     }
 
     public void setId(Long idReport) {
-        this.idReport = idReport;
+        this.id = id;
     }
 
     public Date getStartDate() {
@@ -177,11 +177,11 @@ public class Report {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Report report = (Report) o;
-        return idReport.equals(report.idReport);
+        return id.equals(report.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idReport);
+        return Objects.hash(id);
     }
 }

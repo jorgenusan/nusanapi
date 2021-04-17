@@ -15,13 +15,14 @@ public class ClientService {
         return repository.findById(id).orElse(null);
     }
 
-    public Client createClient(Client client){
-        return repository.save(client);
-    }
+    public Client createClient(Client client){return repository.save(client);}
 
     public Boolean isDniUsed(String dni){return repository.existsByDni(dni);}
 
-    public void deleteClientById(Long id){ repository.deleteById(id);}
+    public void deleteClientById(Long id){repository.deleteById(id);}
 
-    public boolean existsById(Long id){return repository.existsById(id);}
+    public void deleteCLient(Client client){repository.delete(client);}
+
+    public Boolean existsById(Long id){return repository.existsById(id);}
+
 }

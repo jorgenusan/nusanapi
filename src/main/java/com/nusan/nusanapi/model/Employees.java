@@ -11,10 +11,10 @@ public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_employee")
-    private Long idEmployee;
+    private Long id;
 
     @Column(name = "name_emp")
-    private String nameEmp;
+    private String name;
 
     @Column(name = "last_name")
     private String lastName;
@@ -29,39 +29,39 @@ public class Employees {
     private Integer phoneNumber;
 
     @Column(name = "status_emp")
-    private Integer statusEmp;
+    private String status;
 
     @Column(name = "password_emp")
-    private String passwordEmp;
+    private String password;
 
     @Override
     public String toString() {
         return "Employees{" +
-                "idEmployee=" + idEmployee +
-                ", nameEmp='" + nameEmp + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dni='" + dni + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
-                ", statusEmp=" + statusEmp +
-                ", passwordEmp='" + passwordEmp + '\'' +
+                ", status='" + status + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 
-    public Long getIdEmployee() {
-        return idEmployee;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdEmployee(Long idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getNameEmp() {
-        return nameEmp;
+    public String getName() {
+        return name;
     }
 
-    public void setNameEmp(String nameEmp) {
-        this.nameEmp = nameEmp;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -96,20 +96,20 @@ public class Employees {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getStatusEmp() {
-        return statusEmp;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusEmp(Integer statusEmp) {
-        this.statusEmp = statusEmp;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getPasswordEmp() {
-        return passwordEmp;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordEmp(String passwordEmp) {
-        this.passwordEmp = passwordEmp;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -117,11 +117,11 @@ public class Employees {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employees employees = (Employees) o;
-        return idEmployee.equals(employees.idEmployee);
+        return id.equals(employees.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEmployee);
+        return Objects.hash(id);
     }
 }
