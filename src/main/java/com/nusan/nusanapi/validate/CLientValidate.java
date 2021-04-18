@@ -1,5 +1,6 @@
 package com.nusan.nusanapi.validate;
 
+import com.nusan.nusanapi.model.Client;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -16,9 +17,17 @@ public class CLientValidate implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"Client.name", "Name must not be empty.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"Client.lastName", "Last name must not be empty.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"Client.dni", "DNI must not be empty.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"Client.phoneNumber", "Phone number must not be empty.");
+        ValidationUtils.rejectIfEmpty(errors,"name","client.name", "Name must not be empty.");
+        ValidationUtils.rejectIfEmpty(errors,"lastName","client.lastName", "Last name must not be empty.");
+        ValidationUtils.rejectIfEmpty(errors,"dni","client.dni", "DNI must not be empty.");
+        ValidationUtils.rejectIfEmpty(errors,"phoneNumber","client.phoneNumber", "Phone number must not be empty.");
+
+        Client client = (Client) target;
+
+         String number = client.getPhoneNumber().toString();
+        if(!number.matches("^\\d{9}$")){
+            errors.rejectValue("phoneNumber","client.phoneNumber","Phone number  must have 9 digits.");
+        }
+
     }
 }

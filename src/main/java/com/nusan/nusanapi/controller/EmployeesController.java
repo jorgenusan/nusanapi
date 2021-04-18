@@ -21,17 +21,16 @@ public class EmployeesController {
     @Autowired
     private EmployeesService service;
 
-    /*
     @Autowired
-    private EmployeesValidate validate;
-     */
+    EmployeesValidate validate;
+
 
     @RequestMapping(path = "/employees", method = RequestMethod.POST)
-    public ResponseEntity<Employees> createEmployee(@RequestBody Employees employees/*, BindingResult result*/){
-        /*validate.validate(employees, result);
+    public ResponseEntity<Employees> createEmployee(@RequestBody Employees employees, BindingResult result){
+        validate.validate(employees, result);
         if(result.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }*/
+        }
 
         if(!service.getEmployeeByDni(employees.getDni())){
             Employees employeesCreated = service.create(employees);

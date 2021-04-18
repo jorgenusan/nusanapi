@@ -13,25 +13,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
 public class ClientController {
 
     @Autowired
     private ClientService service;
 
-    /*
+
     @Autowired
-    private CLientValidate validator;
-     */
+    CLientValidate validator;
+
 
     @RequestMapping(path = "/client", method = RequestMethod.POST)
-    public ResponseEntity<Client> createClients(@RequestBody Client client/*, BindingResult result*/){
-        /*
+    public ResponseEntity<Client> createClients(@RequestBody Client client, BindingResult result){
+
         validator.validate(client, result);
         if(result.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-        */
+
 
         if(!service.isDniUsed(client.getDni())){
             Client clientCreated = service.createClient(client);

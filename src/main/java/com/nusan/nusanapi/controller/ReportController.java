@@ -18,17 +18,17 @@ public class ReportController {
 
     @Autowired
     private ReportService service;
-/*
+
     @Autowired
-    private ReportValidate validate;
- */
+    ReportValidate validate;
+
 
     @RequestMapping(path = "/report", method = RequestMethod.POST)
-    public ResponseEntity<Report> createReport(@RequestBody Report report/*, BindingResult result*/){
-        /*validate.validate(report, result);
+    public ResponseEntity<Report> createReport(@RequestBody Report report, BindingResult result){
+        validate.validate(report, result);
         if(result.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }*/
+        }
 
         Report reportCreated = service.createReport(report);
         return new ResponseEntity<>(reportCreated, HttpStatus.CREATED);
