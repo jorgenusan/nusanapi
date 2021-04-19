@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS clients(
 	name_emp varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
     dni VARCHAR(9) NOT NULL,
-	email varchar(50),
+	email varchar(50) NOT NULL,
 	phone_number INT NOT NULL,
     status_emp enum('conectado','desconectado'),
     password_emp varchar(45) NOT NULL
