@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EmployeesRepository extends CrudRepository<Employees, Long> {
     Boolean existsByDni(String dni);
+    Boolean existsByEmail(String email);
 }

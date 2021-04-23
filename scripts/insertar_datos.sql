@@ -16,11 +16,11 @@ INSERT INTO clients (name_cli,last_name,dni,email,phone_number,city,address) VAL
 ('Santiago','Molero Sandoval','76588254W','santiagomolero@example.com',685593127,'Portosín','Ronda Castro, 010, 3º B'),
 ('Luis Miguel','Velazquez Parras','52451043A','luismiguel@example.com',475869132,'Muros','Camiño Ruiz, 510, 41º B');
 
-INSERT INTO employees (name_emp,last_name,dni,email,phone_number,status_emp,password_emp) VALUES 
-('Jorge','Núñez Santiago','78806952M','jorge.nusan@gmail.com',627943192,'desconectado','abc123.'),
-('Mariano','Belmonte Benavent','23417467V','marianobelmonte@example.com',369258147,'desconectado','abc123.'),
-('Joan','Muro Centeno','60690724A','joanmuro@example.com',123789456,'desconectado','abc123.'),
-('Ismael','Castañeda Barranco','87170626M','ismaelcastañeda@example.com',852456357,'desconectado','abc123.');
+INSERT INTO employees (name_emp,last_name,dni,email,phone_number,rol,password_emp) VALUES 
+('Jorge','Núñez Santiago','78806952M','jorge.nusan@gmail.com',627943192,'admin','abc123.'),
+('Mariano','Belmonte Benavent','23417467V','marianobelmonte@example.com',369258147,'employee','abc123.'),
+('Joan','Muro Centeno','60690724A','joanmuro@example.com',123789456,'employee','abc123.'),
+('Ismael','Castañeda Barranco','87170626M','ismaelcastañeda@example.com',852456357,'employee','abc123.');
  
 INSERT INTO reports (start_date,ending_date,date_apointment,priority,state,machine,brand,observations,payment,payment_method,id_emp,id_cli) VALUES 
 ('2020-11-05','2020-12-10','2020-11-12','media','cerrado','Nevera','Balay','',50,'efectivo',1,2),

@@ -28,8 +28,8 @@ public class Employees {
     @Column(name = "phone_number")
     private Integer phoneNumber;
 
-    @Column(name = "status_emp")
-    private String status;
+    @Column(name = "rol")
+    private String rol;
 
     @Column(name = "password_emp")
     private String password;
@@ -43,7 +43,7 @@ public class Employees {
                 ", dni='" + dni + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
-                ", status='" + status + '\'' +
+                ", rol='" + rol + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
@@ -96,12 +96,12 @@ public class Employees {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getStatus() {
-        return status;
+    public String getRol() {
+        return rol;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getPassword() {

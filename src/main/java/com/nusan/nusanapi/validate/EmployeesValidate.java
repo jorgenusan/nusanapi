@@ -1,6 +1,8 @@
 package com.nusan.nusanapi.validate;
 
 import com.nusan.nusanapi.model.Employees;
+import com.nusan.nusanapi.service.EmployeesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -8,6 +10,10 @@ import org.springframework.validation.Validator;
 
 @Component
 public class EmployeesValidate implements Validator {
+
+    @Autowired
+    private EmployeesService service;
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -28,11 +34,11 @@ public class EmployeesValidate implements Validator {
             errors.rejectValue("phoneNumber","employees.phoneNumber","Phone number  must have 9 digits.");
         }
 
-        if (!employees.getEmail().matches("^(.+\\@.+\\..+)$")){
+        if (!employees.getEmail().matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$")){
             errors.rejectValue("email","employees.email","Email not valid.");
         }
 
-        if(!employees.getDni().matches("^\\d{8}(?:[-\\s]\\d{4})?$")){
+        if(!employees.getDni().matches("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")){
             errors.rejectValue("dni","employees.dni","DNI is not valid.");
         }
 
@@ -40,8 +46,14 @@ public class EmployeesValidate implements Validator {
             errors.rejectValue("password","employees.password","The password must have a capital letter, a digit, a special character and a size of 6 to 15 characters.");
         }
 
-        if(!employees.getStatus().equals("conectado")||!employees.getStatus().equals("desconectado")){
-            errors.rejectValue("status","employees.status","The status can only be connected or disconnected");
+        if(!employees.getRol().equals("admin")){
+            if(!employees.getRol().equals("employee")){
+                errors.rejectValue("rol","employees.rol","The status can only be admin or employee");
+            }
+        }
+
+        if(!service.getEmployeeByEmail(employees.getEmail())) {
+            errors.reject("employees.email.repeated","This email already exists.");
         }
     }
 }

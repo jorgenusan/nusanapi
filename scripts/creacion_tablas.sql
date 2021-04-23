@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS clients(
     dni VARCHAR(9) NOT NULL,
 	email varchar(50) NOT NULL,
 	phone_number INT NOT NULL,
-    status_emp enum('conectado','desconectado'),
+    rol enum('admin','employee'),
     password_emp varchar(45) NOT NULL
   );
 CREATE TABLE IF NOT EXISTS reports(

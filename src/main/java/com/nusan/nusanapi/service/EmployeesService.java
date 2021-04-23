@@ -17,6 +17,8 @@ public class EmployeesService {
 
     public Boolean getEmployeeByDni(String dni){return repository.existsByDni(dni);}
 
+    public Boolean getEmployeeByEmail(String email){return repository.existsByEmail(email);}
+
     public Boolean existsById(Long id){return repository.existsById(id);}
 
     public void deleteEmployeeById(Long id){repository.deleteById(id);}

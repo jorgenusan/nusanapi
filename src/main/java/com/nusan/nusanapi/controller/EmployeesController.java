@@ -4,7 +4,6 @@ package com.nusan.nusanapi.controller;
 import com.nusan.nusanapi.model.Employees;
 import com.nusan.nusanapi.service.EmployeesService;
 import com.nusan.nusanapi.validate.EmployeesValidate;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
