@@ -1,5 +1,9 @@
 package com.nusan.nusanapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.nusan.nusanapi.model.Employees;
 import com.nusan.nusanapi.model.Report;
 import com.nusan.nusanapi.service.ReportService;
 import com.nusan.nusanapi.validate.ReportValidate;
@@ -8,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ReportController {
@@ -49,14 +50,18 @@ public class ReportController {
         }
     }
 
-    @RequestMapping(path = "/report", method = RequestMethod.PUT)
-    public ResponseEntity<Report> modifyReport(@RequestBody Report report){
-        if(!service.existsById(report.getId())){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }else{
-            service.deleteReport(report);
-            service.createReport(report);
-            return ResponseEntity.ok(service.getReportById(report.getId()));
+    @PatchMapping(path = "/report/{id}")
+    public ResponseEntity<Report> updateEmployee(@PathVariable long id, @RequestBody JsonPatch patch, BindingResult result){
+        if(!service.existsById(id)){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        try{
+            Report report = service.getReportById(id);
+            Report reportPatch = service.applyPatchToUser(patch, report);
+            service.createReport(reportPatch);
+            return ResponseEntity.ok(reportPatch);
+        }catch (JsonPatchException | JsonProcessingException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

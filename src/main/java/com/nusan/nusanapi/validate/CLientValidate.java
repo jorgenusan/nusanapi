@@ -33,7 +33,7 @@ public class CLientValidate implements Validator {
             errors.rejectValue("email","client.email","Email not valid.");
         }
 
-        if(!client.getDni().matches("^\\d{8}(?:[-\\s]\\d{4})?$")){
+        if(!client.getDni().matches("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")){
             errors.rejectValue("dni","client.dni","DNI is not valid.");
         }
 

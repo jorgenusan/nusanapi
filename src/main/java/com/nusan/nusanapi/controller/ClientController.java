@@ -1,5 +1,8 @@
 package com.nusan.nusanapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import com.nusan.nusanapi.model.Client;
 import com.nusan.nusanapi.service.ClientService;
 import com.nusan.nusanapi.validate.CLientValidate;
@@ -8,10 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -57,15 +57,18 @@ public class ClientController {
         }
     }
 
-    @RequestMapping(path = "/client", method = RequestMethod.PUT)
-    public ResponseEntity<Client> modifyClient(@RequestBody Client client){
-        if(!service.existsById(client.getId())){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }else{
-            service.deleteCLient(client);
-            service.createClient(client);
-            return ResponseEntity.ok(service.getClientById(client.getId()));
+    @PatchMapping(path = "/client/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable long id, @RequestBody JsonPatch patch){
+        if(!service.existsById(id)){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        try{
+            Client client = service.getClientById(id);
+            Client clientPatch = service.applyPatchToUser(patch, client);
+            service.createClient(clientPatch);
+            return ResponseEntity.ok(clientPatch);
+        }catch (JsonPatchException | JsonProcessingException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 }

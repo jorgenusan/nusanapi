@@ -1,6 +1,9 @@
 package com.nusan.nusanapi.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import com.nusan.nusanapi.model.Employees;
 import com.nusan.nusanapi.service.EmployeesService;
 import com.nusan.nusanapi.validate.EmployeesValidate;
@@ -9,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class EmployeesController {
@@ -54,14 +54,18 @@ public class EmployeesController {
         }
     }
 
-    @RequestMapping(path = "/employees", method = RequestMethod.PUT)
-    public ResponseEntity<Employees> modifyEmployee(@RequestBody Employees employees){
-        if(!service.existsById(employees.getId())){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }else{
-            service.deleteEmployee(employees);
-            service.create(employees);
-            return  ResponseEntity.ok(service.getEmployeeById(employees.getId()));
+    @PatchMapping(path = "/employees/{id}")
+    public ResponseEntity<Employees> updateEmployee(@PathVariable long id, @RequestBody JsonPatch patch){
+        if(!service.existsById(id)){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        try{
+            Employees employees = service.getEmployeeById(id);
+            Employees employeePatch = service.applyPatchToUser(patch, employees);
+            service.create(employeePatch);
+            return ResponseEntity.ok(employeePatch);
+        }catch (JsonPatchException | JsonProcessingException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
