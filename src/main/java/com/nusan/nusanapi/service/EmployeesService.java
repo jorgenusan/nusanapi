@@ -10,6 +10,8 @@ import com.nusan.nusanapi.repository.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.PreparedStatement;
+
 @Service
 public class EmployeesService {
 
@@ -23,9 +25,11 @@ public class EmployeesService {
 
     public Employees getEmployeeById(Long id){return repository.findById(id).orElse(null);}
 
-    public Boolean getEmployeeByDni(String dni){return repository.existsByDni(dni);}
+    public Employees findByEmail(String email){return repository.findByEmail(email);}
 
-    public Boolean getEmployeeByEmail(String email){return repository.existsByEmail(email);}
+    public Boolean existEmployeeByDni(String dni){return repository.existsByDni(dni);}
+
+    public Boolean existEmployeeByEmail(String email){return repository.existsByEmail(email);}
 
     public Boolean existsById(Long id){return repository.existsById(id);}
 

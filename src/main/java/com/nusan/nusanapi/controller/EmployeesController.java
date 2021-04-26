@@ -31,7 +31,7 @@ public class EmployeesController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        if(!service.getEmployeeByDni(employees.getDni())){
+        if(!service.existEmployeeByDni(employees.getDni())){
             Employees employeesCreated = service.create(employees);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }else{

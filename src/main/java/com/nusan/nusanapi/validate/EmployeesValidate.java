@@ -52,7 +52,7 @@ public class EmployeesValidate implements Validator {
             }
         }
 
-        if(!service.getEmployeeByEmail(employees.getEmail())) {
+        if(!service.existEmployeeByEmail(employees.getEmail())) {
             errors.reject("employees.email.repeated","This email already exists.");
         }
     }
