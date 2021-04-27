@@ -17,19 +17,21 @@ public class LoginController {
     @Autowired
     private EmployeesService employeesService;
 
-    @RequestMapping(path = "/login", method = RequestMethod.PUT)
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ResponseEntity<Login> loginForm(@RequestBody Login login){
 
         String email = login.getEmail();
         String password = login.getPassword();
+
+
         if(!employeesService.existEmployeeByEmail(email)){
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
         }else{
             Employees employee =  employeesService.findByEmail(email);
             if(!employee.getPassword().equals(password)){
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
             }else{
-                return new ResponseEntity<>(HttpStatus.OK);
+                return ResponseEntity.status(HttpStatus.OK).body(null);
             }
         }
     }
