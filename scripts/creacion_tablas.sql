@@ -1,3 +1,4 @@
+create database if not exists nusan_db;
 use nusan_db;
 CREATE TABLE IF NOT EXISTS clients(
 	id_client bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
