@@ -22,19 +22,19 @@ public class PaginateController {
     @Autowired
     private PaginateService service;
 
-    @RequestMapping(path = "/allClients", method = RequestMethod.GET)
+    @RequestMapping(path = "/allClients", method = RequestMethod.POST)
     public ResponseEntity<List<Client>> getAllClients(@RequestBody Paginate paginate){
         List<Client> list = service.getAllClients(paginate.getNumPage(),paginate.getSizePage(), paginate.getSortBy(),paginate.isAscending());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/allEmployees", method = RequestMethod.GET)
+    @RequestMapping(path = "/allEmployees", method = RequestMethod.POST)
     public ResponseEntity<List<Employees>> getAllEmployees(@RequestBody Paginate paginate){
         List<Employees> list = service.getAllEmployees(paginate.getNumPage(),paginate.getSizePage(), paginate.getSortBy(),paginate.isAscending());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/allReports", method = RequestMethod.GET)
+    @RequestMapping(path = "/allReports", method = RequestMethod.POST)
     public ResponseEntity<List<Report>> getAllReports(@RequestBody Paginate paginate){
         List<Report> list = service.getAllReports(paginate.getNumPage(),paginate.getSizePage(), paginate.getSortBy(),paginate.isAscending());
         return new ResponseEntity<>(list, HttpStatus.OK);
