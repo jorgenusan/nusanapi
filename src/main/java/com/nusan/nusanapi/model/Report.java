@@ -1,6 +1,8 @@
 
 package com.nusan.nusanapi.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -13,12 +15,15 @@ public class Report {
     @Column(name = "id_report")
     private Long id;
 
+    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(name="start_date")
     private Date startDate;
 
+    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(name = "ending_date")
     private Date endingDate;
 
+    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(name = "date_apointment")
     private Date dateApointment;
 
