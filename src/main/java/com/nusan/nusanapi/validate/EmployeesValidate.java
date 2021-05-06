@@ -42,18 +42,14 @@ public class EmployeesValidate implements Validator {
             errors.rejectValue("dni","employees.dni","DNI is not valid.");
         }
 
-        if(!employees.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{6,15}")){
-            errors.rejectValue("password","employees.password","The password must have a capital letter, a digit, a special character and a size of 6 to 15 characters.");
+        if(!employees.getPassword().matches("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$")){
+            errors.rejectValue("password","employees.password","La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos.");
         }
 
         if(!employees.getRol().equals("admin")){
-            if(!employees.getRol().equals("employee")){
-                errors.rejectValue("rol","employees.rol","The status can only be admin or employee");
+            if(!employees.getRol().equals("empleado")){
+                errors.rejectValue("rol","employees.rol","The status can only be admin or empleado");
             }
-        }
-
-        if(!service.existEmployeeByEmail(employees.getEmail())) {
-            errors.reject("employees.email.repeated","This email already exists.");
         }
     }
 }

@@ -18,9 +18,9 @@ INSERT INTO clients (name_cli,last_name,dni,email,phone_number,city,address) VAL
 
 INSERT INTO employees (name_emp,last_name,dni,email,phone_number,rol,password_emp) VALUES 
 ('Jorge','Núñez Santiago','78806952M','jorge.nusan@gmail.com',627943192,'admin','abc123.'),
-('Mariano','Belmonte Benavent','23417467V','marianobelmonte@example.com',369258147,'employee','abc123.'),
-('Joan','Muro Centeno','60690724A','joanmuro@example.com',123789456,'employee','abc123.'),
-('Ismael','Castañeda Barranco','87170626M','ismaelcastañeda@example.com',852456357,'employee','abc123.');
+('Mariano','Belmonte Benavent','23417467V','marianobelmonte@example.com',369258147,'empleado','abc123.'),
+('Joan','Muro Centeno','60690724A','joanmuro@example.com',123789456,'empleado','abc123.'),
+('Ismael','Castañeda Barranco','87170626M','ismaelcastañeda@example.com',852456357,'empleado','abc123.');
  
 INSERT INTO reports (start_date,ending_date,date_apointment,priority,state,machine,brand,observations,payment,payment_method,id_emp,id_cli) VALUES 
 ('2020-11-05','2020-12-10','2020-11-12','media','cerrado','Nevera','Balay','',50,'efectivo',1,2),
