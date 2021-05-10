@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @Controller
 public class ClientController {
@@ -45,6 +47,12 @@ public class ClientController {
     @RequestMapping(path = "/client/{id}", method = RequestMethod.GET)
     public ResponseEntity<Client> geClientById(@PathVariable Long id){
         return ResponseEntity.ok(service.getClientById(id));
+
+    }
+    @RequestMapping(path = "/clientdni/{dni}", method = RequestMethod.GET)
+    public ResponseEntity<Client> geClientByDni(@PathVariable String dni){
+        String dniCli = dni.replace(" ","");
+        return ResponseEntity.ok(service.getClientByDni(dniCli));
     }
 
     @RequestMapping(path = "/client/{id}", method = RequestMethod.DELETE)
@@ -57,8 +65,21 @@ public class ClientController {
         }
     }
 
+    @RequestMapping(path = "/clientdni/{dni}", method = RequestMethod.DELETE)
+    public ResponseEntity<Client> deleteClient(@PathVariable String dni){
+        String dniCli = dni.replace(" ","");
+        if(!service.existsByDni(dniCli)){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }else{
+            Client cli = service.getClientByDni(dniCli);
+            service.deleteClientById(cli.getId());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
     @PatchMapping(path = "/client/{id}")
     public ResponseEntity<Client> updateClient(@PathVariable long id, @RequestBody JsonPatch patch){
+
         if(!service.existsById(id)){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

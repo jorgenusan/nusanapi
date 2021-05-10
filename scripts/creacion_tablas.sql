@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS clients(
 	address varchar(255)
  );
  CREATE TABLE IF NOT EXISTS employees(
-	id_employee bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id_employee bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	name_emp varchar(50) NOT NULL,
 	last_name varchar(50) NOT NULL,
     dni VARCHAR(9) NOT NULL,

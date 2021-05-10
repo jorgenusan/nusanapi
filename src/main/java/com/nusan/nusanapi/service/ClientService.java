@@ -23,6 +23,8 @@ public class ClientService {
         return repository.findById(id).orElse(null);
     }
 
+    public Client getClientByDni(String dni){return repository.findByDni(dni);}
+
     public Client createClient(Client client){return repository.save(client);}
 
     public Boolean isDniUsed(String dni){return repository.existsByDni(dni);}
@@ -32,6 +34,8 @@ public class ClientService {
     public void deleteClient(Client client){repository.delete(client);}
 
     public Boolean existsById(Long id){return repository.existsById(id);}
+
+    public Boolean existsByDni(String dni){return repository.existsByDni(dni);}
 
     public Client applyPatchToUser(JsonPatch patch, Client targetUser) throws JsonPatchException, JsonProcessingException {
         JsonNode patched = patch.apply(objectMapper.convertValue(targetUser, JsonNode.class));
