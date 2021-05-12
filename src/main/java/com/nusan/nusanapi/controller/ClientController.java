@@ -46,30 +46,42 @@ public class ClientController {
 
     @RequestMapping(path = "/client/{id}", method = RequestMethod.GET)
     public ResponseEntity<Client> geClientById(@PathVariable Long id){
-        return ResponseEntity.ok(service.getClientById(id));
+        Client client = service.getClientById(id);
+        if(client != null){
+            return ResponseEntity.ok(service.getClientById(id));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
 
     }
-    @RequestMapping(path = "/clientdni/{dni}", method = RequestMethod.GET)
+    @RequestMapping(path = "/clientDni/{dni}", method = RequestMethod.GET)
     public ResponseEntity<Client> geClientByDni(@PathVariable String dni){
         String dniCli = dni.replace(" ","");
-        return ResponseEntity.ok(service.getClientByDni(dniCli));
+        Client client = service.getClientByDni(dni);
+        if(client != null){
+            return ResponseEntity.ok(client);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
     }
 
     @RequestMapping(path = "/client/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Client> deleteClient(@PathVariable Long id){
         if(!service.existsById(id)){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
             service.deleteClientById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 
-    @RequestMapping(path = "/clientdni/{dni}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/clientDni/{dni}", method = RequestMethod.DELETE)
     public ResponseEntity<Client> deleteClient(@PathVariable String dni){
         String dniCli = dni.replace(" ","");
         if(!service.existsByDni(dniCli)){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
             Client cli = service.getClientByDni(dniCli);
             service.deleteClientById(cli.getId());
@@ -81,7 +93,7 @@ public class ClientController {
     public ResponseEntity<Client> updateClient(@PathVariable long id, @RequestBody JsonPatch patch){
 
         if(!service.existsById(id)){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         try{
             Client client = service.getClientById(id);

@@ -2,6 +2,7 @@
 package com.nusan.nusanapi.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -48,16 +49,20 @@ public class Report {
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    @Column(name = "id_emp")
-    private Integer idEmp;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cli_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Client client;
 
-    @Column(name = "id_cli")
-    private Integer idCli;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "emp_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Employees employees;
 
     @Override
     public String toString() {
         return "Report{" +
-                "idReport=" + id +
+                "id=" + id +
                 ", startDate=" + startDate +
                 ", endingDate=" + endingDate +
                 ", dateApointment=" + dateApointment +
@@ -68,8 +73,8 @@ public class Report {
                 ", observations='" + observations + '\'' +
                 ", payment=" + payment +
                 ", paymentMethod='" + paymentMethod + '\'' +
-                ", idEmp=" + idEmp +
-                ", idCli=" + idCli +
+                ", client=" + client +
+                ", employees=" + employees +
                 '}';
     }
 
@@ -77,7 +82,7 @@ public class Report {
         return id;
     }
 
-    public void setId(Long idReport) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -161,20 +166,20 @@ public class Report {
         this.paymentMethod = paymentMethod;
     }
 
-    public Integer getIdEmp() {
-        return idEmp;
+    public Client getClient() {
+        return client;
     }
 
-    public void setIdEmp(Integer idEmp) {
-        this.idEmp = idEmp;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public Integer getIdCli() {
-        return idCli;
+    public Employees getEmployees() {
+        return employees;
     }
 
-    public void setIdCli(Integer idCli) {
-        this.idCli = idCli;
+    public void setEmployees(Employees employees) {
+        this.employees = employees;
     }
 
     @Override

@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 public class ReportController {
 
@@ -37,8 +39,14 @@ public class ReportController {
 
     @RequestMapping(path = "/report/{id}", method = RequestMethod.GET)
     public ResponseEntity<Report> getReportById(@PathVariable Long id){
-        return ResponseEntity.ok(service.getReportById(id));
+        Report report = service.getReportById(id);
+        if(report != null){
+            return ResponseEntity.ok(report);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
+
 
     @RequestMapping(path = "/report/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Report> deleteReport(@PathVariable Long id){
@@ -53,7 +61,7 @@ public class ReportController {
     @PatchMapping(path = "/report/{id}")
     public ResponseEntity<Report> updateEmployee(@PathVariable long id, @RequestBody JsonPatch patch, BindingResult result){
         if(!service.existsById(id)){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         try{
             Report report = service.getReportById(id);

@@ -5,6 +5,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name="clients")
@@ -35,7 +36,6 @@ public class Client {
 
     @Column(name = "address")
     private String address;
-
 
 
     @Override
@@ -115,6 +115,7 @@ public class Client {
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     @Override
     public boolean equals(Object o) {

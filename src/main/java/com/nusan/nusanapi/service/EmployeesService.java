@@ -25,6 +25,8 @@ public class EmployeesService {
 
     public Employees getEmployeeById(Long id){return repository.findById(id).orElse(null);}
 
+    public Employees getEmployeeByDni(String dni){return repository.findByDni(dni);}
+
     public Employees findByEmail(String email){return repository.findByEmail(email);}
 
     public Boolean existEmployeeByDni(String dni){return repository.existsByDni(dni);}

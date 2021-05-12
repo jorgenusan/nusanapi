@@ -16,7 +16,6 @@ public class ReportValidate implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,"startDate","report.startDate", "The start date must not be empty.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"idCli","report.idCli", "ID Client must not be empty.");
 
         Report report = (Report) target;
 

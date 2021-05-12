@@ -33,7 +33,7 @@ public class EmployeesController {
 
         if(!service.existEmployeeByDni(employees.getDni())){
             Employees employeesCreated = service.create(employees);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(employeesCreated, HttpStatus.CREATED);
         }else{
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
@@ -41,7 +41,23 @@ public class EmployeesController {
 
     @RequestMapping(path = "/employees/{id}", method = RequestMethod.GET)
     public ResponseEntity<Employees> getEmployeeById(@PathVariable Long id){
-        return  ResponseEntity.ok(service.getEmployeeById(id));
+        Employees employees = service.getEmployeeById(id);
+        if(employees != null){
+            return  ResponseEntity.ok(service.getEmployeeById(id));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @RequestMapping(path = "/employeesDni/{dni}", method = RequestMethod.GET)
+    public ResponseEntity<Employees> getEmployeeByDni(@PathVariable String dni){
+        String dniEmp = dni.replace(" ","");
+        Employees employees = service.getEmployeeByDni(dniEmp);
+        if(employees != null){
+            return ResponseEntity.ok(employees);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @RequestMapping(path = "/employees/{id}", method = RequestMethod.DELETE)
@@ -57,7 +73,7 @@ public class EmployeesController {
     @PatchMapping(path = "/employees/{id}")
     public ResponseEntity<Employees> updateEmployee(@PathVariable long id, @RequestBody JsonPatch patch){
         if(!service.existsById(id)){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         try{
             Employees employees = service.getEmployeeById(id);

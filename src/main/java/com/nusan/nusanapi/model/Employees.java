@@ -3,6 +3,7 @@ package com.nusan.nusanapi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "employees")
@@ -33,7 +34,6 @@ public class Employees {
 
     @Column(name = "password_emp")
     private String password;
-
 
     @Override
     public String toString() {
@@ -112,6 +112,7 @@ public class Employees {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     @Override
     public boolean equals(Object o) {
