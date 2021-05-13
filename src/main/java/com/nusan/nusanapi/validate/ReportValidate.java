@@ -48,11 +48,11 @@ public class ReportValidate implements Validator {
             errors.rejectValue("endingDate","report.endingDate","Date format xx/xx/xxx.");
         }
 
-        if(!report.getPriority().equals("alta")&&!report.getPriority().equals("media")&&!report.getPriority().equals("baja")){
+        if(!report.getPriority().equals("Alta")&&!report.getPriority().equals("Media")&&!report.getPriority().equals("Baja")){
             errors.rejectValue("priority","report.priority","Priority can only be high, medium or low.");
         }
 
-        if(!report.getState().equals("abierto")&&!report.getState().equals("pendiente")&&!report.getState().equals("cerrado")){
+        if(!report.getState().equals("Abierto")&&!report.getState().equals("Pendiente")&&!report.getState().equals("Cerrado")){
             errors.rejectValue("state","report.state","State can be only open, pending or cloed.");
         }
 
@@ -60,7 +60,7 @@ public class ReportValidate implements Validator {
             errors.rejectValue("payment","report.payment","Payment has to be numbers.");
         }
 
-        if(!report.getPaymentMethod().equals("efectivo")&&!report.getPaymentMethod().equals("tarjeta")&&!report.getPaymentMethod().equals("")){
+        if(!report.getPaymentMethod().equals("Efectivo")&&!report.getPaymentMethod().equals("Tarjeta")&&!report.getPaymentMethod().equals("")){
             errors.rejectValue("paymentMethod","report.paymentMethod","Payment method can only be cash or card.");
         }
     }

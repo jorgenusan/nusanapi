@@ -46,8 +46,8 @@ public class EmployeesValidate implements Validator {
             errors.rejectValue("password","employees.password","La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos.");
         }
 
-        if(!employees.getRol().equals("admin")){
-            if(!employees.getRol().equals("empleado")){
+        if(!employees.getRol().equals("Admin")){
+            if(!employees.getRol().equals("Empleado")){
                 errors.rejectValue("rol","employees.rol","The status can only be admin or empleado");
             }
         }
