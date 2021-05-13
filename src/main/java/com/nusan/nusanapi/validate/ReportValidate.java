@@ -19,7 +19,6 @@ public class ReportValidate implements Validator {
 
         Report report = (Report) target;
 
-
         String startDate = report.getStartDate().toString();
         String dateApointment;
         String endingDate;
@@ -55,13 +54,13 @@ public class ReportValidate implements Validator {
         if(!report.getState().equals("Abierto")&&!report.getState().equals("Pendiente")&&!report.getState().equals("Cerrado")){
             errors.rejectValue("state","report.state","State can be only open, pending or cloed.");
         }
-
+/*
         if(!report.getPayment().toString().matches("^\\d+$")&&!report.getPayment().toString().matches("")){
             errors.rejectValue("payment","report.payment","Payment has to be numbers.");
         }
 
         if(!report.getPaymentMethod().equals("Efectivo")&&!report.getPaymentMethod().equals("Tarjeta")&&!report.getPaymentMethod().equals("")){
             errors.rejectValue("paymentMethod","report.paymentMethod","Payment method can only be cash or card.");
-        }
+        }*/
     }
 }

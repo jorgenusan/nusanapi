@@ -63,9 +63,20 @@ public class EmployeesController {
     @RequestMapping(path = "/employees/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Employees> deleteEmployeeById(@PathVariable Long id){
         if(!service.existsById(id)){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }else{
             service.deleteEmployeeById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(path = "/employeesDni/{dni}", method = RequestMethod.DELETE)
+    public ResponseEntity<Employees> deleteEmployeeById(@PathVariable String dni){
+        if(!service.existEmployeeByDni(dni)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            Employees employees = service.getEmployeeByDni(dni);
+            service.deleteEmployeeById(employees.getId());
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
