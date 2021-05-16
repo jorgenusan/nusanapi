@@ -10,13 +10,13 @@ public class Paginate {
         this.numPage=numPage;
 
         if(sizePage==0){
-            this.sizePage = 5;
+            this.sizePage = 10;
         }else{
             this.sizePage=sizePage;
         }
 
         if(sortBy==null){
-            this.sortBy="name";
+            this.sortBy="id";
         }else{
             this.sortBy=sortBy;
         }

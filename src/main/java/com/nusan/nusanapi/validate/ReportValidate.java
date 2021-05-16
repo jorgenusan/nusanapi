@@ -47,7 +47,7 @@ public class ReportValidate implements Validator {
             errors.rejectValue("endingDate","report.endingDate","Date format xx/xx/xxx.");
         }
 
-        if(!report.getPriority().equals("Alta")&&!report.getPriority().equals("Media")&&!report.getPriority().equals("Baja")){
+        if(!report.getPriority().equals("Sin definir")&&!report.getPriority().equals("Alta")&&!report.getPriority().equals("Media")&&!report.getPriority().equals("Baja")){
             errors.rejectValue("priority","report.priority","Priority can only be high, medium or low.");
         }
 
