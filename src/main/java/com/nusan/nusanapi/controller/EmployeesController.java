@@ -10,9 +10,15 @@ import com.nusan.nusanapi.validate.EmployeesValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 public class EmployeesController {
@@ -22,6 +28,9 @@ public class EmployeesController {
 
     @Autowired
     EmployeesValidate validate;
+    /*
+    @Autowired
+    private JavaMailSender emailSender;*/
 
 
     @RequestMapping(path = "/employees", method = RequestMethod.POST)
@@ -95,4 +104,33 @@ public class EmployeesController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+/*
+    @RequestMapping(path = "/forgot-password/{email}")
+    public ResponseEntity<Employees> forgotEmployeePassword(@PathVariable String email) throws MessagingException, UnsupportedEncodingException {
+        Employees employees = service.findByEmail(email);
+
+        if(employees != null){
+
+            MimeMessage message = emailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom("jorge.nusan@gmail.com", "Nusan Software");
+            helper.setTo(employees.getEmail());
+
+            String subject = "Here's your password.";
+
+            String content = "<p>Hello,</p>"
+                    + "<p>Here's your password: " + employees.getPassword() + "</p>"
+                    + "<p>Ignore this email if you do remember your password.</p>";
+
+            helper.setSubject(subject);
+            helper.setText(content, true);
+
+            emailSender.send(message);
+
+            return new ResponseEntity<>(employees, HttpStatus.OK);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }*/
 }
