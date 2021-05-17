@@ -10,6 +10,8 @@ import com.nusan.nusanapi.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReportService {
 
@@ -33,5 +35,7 @@ public class ReportService {
         JsonNode patched = patch.apply(objectMapper.convertValue(targetUser, JsonNode.class));
         return objectMapper.treeToValue(patched, Report.class);
     }
+
+    public List<Report> allReportsByState(String state){return repository.allReportsByState(state);}
 
 }

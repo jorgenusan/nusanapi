@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -71,5 +72,12 @@ public class ReportController {
         }catch (JsonPatchException | JsonProcessingException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @RequestMapping(path = "/reportState/{state}", method = RequestMethod.GET)
+    public ResponseEntity<List<Report>> getReportsByState(@PathVariable String state){
+        List<Report> reportList = service.allReportsByState(state);
+
+        return new ResponseEntity<>(reportList, HttpStatus.OK);
     }
 }
