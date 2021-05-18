@@ -15,7 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class ReportController {
@@ -74,10 +74,21 @@ public class ReportController {
         }
     }
 
-    @RequestMapping(path = "/reportState/{state}", method = RequestMethod.GET)
-    public ResponseEntity<List<Report>> getReportsByState(@PathVariable String state){
-        List<Report> reportList = service.allReportsByState(state);
+    @RequestMapping(path = "/reportFilter/{filtro}", method = RequestMethod.GET)
+    public ResponseEntity<List<Report>> getReportsByState(@PathVariable String filtro){
+        List<Report> reportList;
+        if(filtro.equals("Abierto")||filtro.equals("Cerrado")||filtro.equals("Pendiente")){
 
+            reportList = service.allReportsByState(filtro);
+
+        }else if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
+
+            reportList = service.allReportsByDate(filtro);
+
+        }else{
+            reportList = null;
+        }
         return new ResponseEntity<>(reportList, HttpStatus.OK);
+
     }
 }

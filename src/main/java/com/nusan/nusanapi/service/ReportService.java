@@ -38,4 +38,6 @@ public class ReportService {
 
     public List<Report> allReportsByState(String state){return repository.allReportsByState(state);}
 
+    public List<Report> allReportsByDate(String date){ return repository.allReportsByDate(date);}
+
 }
