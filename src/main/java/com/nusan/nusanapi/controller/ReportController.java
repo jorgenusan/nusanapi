@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 
@@ -74,20 +75,101 @@ public class ReportController {
         }
     }
 
-    @RequestMapping(path = "/reportFilter/{filtro}", method = RequestMethod.GET)
-    public ResponseEntity<List<Report>> getReportsByState(@PathVariable String filtro){
-        List<Report> reportList;
-        if(filtro.equals("Abierto")||filtro.equals("Cerrado")||filtro.equals("Pendiente")){
+    @RequestMapping(path = "/reportFilter/{filtro}/field/{field}", method = RequestMethod.GET)
+    public ResponseEntity<List<Report>> getReportsByState(@PathVariable String filtro,@PathVariable int field){
+        List<Report> reportList = null;
+        switch(field){
+            case 1: //state
 
-            reportList = service.allReportsByState(filtro);
+                if(filtro.equals("Abierto")||filtro.equals("Cerrado")||filtro.equals("Pendiente")){
+                    reportList = service.allReportsByState(filtro);
+                }else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+                
+                break;
+            case 2: //endingDate
 
-        }else if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
+                if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
+                    reportList = service.allReportsByDateEnd(filtro);
+                }else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+                
+                break;
+            case 3: //dateAppointment
 
-            reportList = service.allReportsByDate(filtro);
+                if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
+                    reportList = service.allReportsByDateAppointment(filtro);
+                }else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
 
-        }else{
-            reportList = null;
+                break;
+            case 4: //startDate
+
+                if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
+                    reportList = service.allReportsByDateStart(filtro);
+                }else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+
+                break;
+            case 5: //priority
+
+                if(filtro.equals("Baja")||filtro.equals("Media")||filtro.equals("Alta")){
+                    reportList = service.allReportsByPriority(filtro);
+                }else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+                break;
+            case 6: //client.lastName
+
+                List<Integer> idClient = service.allReportsByClientLastName(filtro);
+
+                for(int x = 0; x<idClient.size();x++){
+                    reportList = service.allReportsByIdClient(idClient.get(x));
+                }
+
+                break;
+            case 7: //client.dni
+                if(filtro.matches("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")){
+                    List<Integer> idClientDni = service.allReportsByClientDNI(filtro);
+
+                    for(int x = 0; x<idClientDni.size();x++){
+                        reportList = service.allReportsByIdClient(idClientDni.get(x));
+                    }
+                }else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+
+                break;
+            case 8: //employee.lastName
+
+                List<Integer> idEmployee = service.allReportsByEmployeeLastName(filtro);
+
+                for(int x = 0; x<idEmployee.size();x++){
+                    reportList = service.allReportsByIdEmployee(idEmployee.get(x));
+                }
+
+                break;
+            case 9: //employee.dni
+
+                if(filtro.matches("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")){
+                    List<Integer> idEmployeeDni = service.allReportsByEmployeeDNI(filtro);
+
+                    for(int x = 0; x<idEmployeeDni.size();x++){
+                        reportList = service.allReportsByIdEmployee(idEmployeeDni.get(x));
+                    }
+                }else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + field);
         }
+        
         return new ResponseEntity<>(reportList, HttpStatus.OK);
 
     }
