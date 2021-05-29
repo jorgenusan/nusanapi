@@ -71,6 +71,16 @@ public class EmployeesController {
         }
     }
 
+    @RequestMapping(path = "/employeesEmail/{email}", method = RequestMethod.GET)
+    public ResponseEntity<Employees> getEmployeeByEmail(@PathVariable String email){
+        Employees employees = service.findByEmail(email);
+        if(employees != null){
+            return ResponseEntity.ok(employees);
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
     @RequestMapping(path = "/employees/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Employees> deleteEmployeeById(@PathVariable Long id){
         if(!service.existsById(id)){
