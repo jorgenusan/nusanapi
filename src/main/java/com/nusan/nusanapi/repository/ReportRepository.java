@@ -7,37 +7,16 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ReportRepository extends CrudRepository<Report, Long> {
-
+    /*
+    @Query(value = "select r.* from reports as r join clients as c on c.id_client = r.cli_id join employees as e on r.emp_id = e.id_employee where state = ?1 and machine = ?2", nativeQuery = true)
+    List<Report> allReportsByFilters(String filters);
+    */
     @Query("select r from reports r where r.state = ?1")
     List<Report> allReportsByState(String state);
 
     @Query(value = "select * from reports r where r.ending_date = ?1", nativeQuery = true)
     List<Report> allReportsByDateEnd(String date);
 
-    @Query(value = "select * from reports r where r.date_apointment = ?1", nativeQuery = true)
-    List<Report> allReportsByDateAppointment(String date);
-
-    @Query(value = "select * from reports r where r.start_date = ?1", nativeQuery = true)
-    List<Report> allReportsByDateStart(String date);
-
-    @Query(value = "select * from reports r where r.priority = ?1", nativeQuery = true)
-    List<Report> allReportsByPriority(String priority);
-
-    @Query(value = "select * from reports r where r.cli_id = ?1", nativeQuery = true)
-    List<Report> allReportsByIdClient(int id);
-
-    @Query(value = "select id_client from clients c where c.last_name = ?1", nativeQuery = true)
-    List<Integer> allReportsByClientLastName(String lastName);
-
-    @Query(value = "select id_client from clients c where c.dni = ?1", nativeQuery = true)
-    List<Integer> allReportsByClientDNI(String dni);
-
-    @Query(value = "select * from reports r where r.emp_id = ?1", nativeQuery = true)
-    List<Report> allReportsByIdEmployee(int id);
-
-    @Query(value = "select id_employee from employees e where e.last_name = ?1", nativeQuery = true)
-    List<Integer> allReportsByEmployeeLastName(String lastName);
-
-    @Query(value = "select id_employee from employees e where e.dni = ?1", nativeQuery = true)
-    List<Integer> allReportsByEmployeeDNI(String dni);
+    @Query(value = "select * from reports r where r.state = 'Abierto' AND r.emp_id = ?1", nativeQuery = true)
+    List<Report> allReportsByUserId(int id);
 }

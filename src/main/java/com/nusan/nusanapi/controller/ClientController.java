@@ -22,10 +22,8 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
-
     @Autowired
     CLientValidate validator;
-
 
     @RequestMapping(path = "/client", method = RequestMethod.POST)
     public ResponseEntity<Client> createClients(@RequestBody Client client, BindingResult result){
@@ -34,7 +32,6 @@ public class ClientController {
         if(result.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
-
 
         if(!service.isDniUsed(client.getDni())){
             Client clientCreated = service.createClient(client);
@@ -52,9 +49,8 @@ public class ClientController {
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-
-
     }
+
     @RequestMapping(path = "/clientDni/{dni}", method = RequestMethod.GET)
     public ResponseEntity<Client> geClientByDni(@PathVariable String dni){
         String dniCli = dni.replace(" ","");
@@ -64,7 +60,6 @@ public class ClientController {
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-
     }
 
     @RequestMapping(path = "/client/{id}", method = RequestMethod.DELETE)

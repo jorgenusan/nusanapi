@@ -5,16 +5,22 @@ import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.nusan.nusanapi.model.Employees;
 import com.nusan.nusanapi.model.Report;
+import com.nusan.nusanapi.service.ClientService;
 import com.nusan.nusanapi.service.ReportService;
+import com.nusan.nusanapi.service.entities.ReportFilter;
 import com.nusan.nusanapi.validate.ReportValidate;
+import org.dom4j.io.SAXEventRecorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +29,9 @@ public class ReportController {
 
     @Autowired
     private ReportService service;
+
+    @Autowired
+    private ClientService clientService;
 
     @Autowired
     ReportValidate validate;
@@ -86,7 +95,7 @@ public class ReportController {
                 }else{
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                 }
-                
+
                 break;
             case 2: //endingDate
 
@@ -95,82 +104,61 @@ public class ReportController {
                 }else {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                 }
-                
-                break;
-            case 3: //dateAppointment
 
-                if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
-                    reportList = service.allReportsByDateAppointment(filtro);
+                break;
+            case 3: //userId
+                if(filtro.matches("^[0-9]+$")){
+                    int id = Integer.parseInt(filtro);
+                    reportList = service.allReportsByUserId(id);
                 }else{
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                 }
 
                 break;
-            case 4: //startDate
 
-                if(filtro.matches("^\\d{4}\\-\\d{2}\\-\\d{2}$")){
-                    reportList = service.allReportsByDateStart(filtro);
-                }else {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                }
-
-                break;
-            case 5: //priority
-
-                if(filtro.equals("Baja")||filtro.equals("Media")||filtro.equals("Alta")){
-                    reportList = service.allReportsByPriority(filtro);
-                }else{
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                }
-                break;
-            case 6: //client.lastName
-
-                List<Integer> idClient = service.allReportsByClientLastName(filtro);
-
-                for(int x = 0; x<idClient.size();x++){
-                    reportList = service.allReportsByIdClient(idClient.get(x));
-                }
-
-                break;
-            case 7: //client.dni
-                if(filtro.matches("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")){
-                    List<Integer> idClientDni = service.allReportsByClientDNI(filtro);
-
-                    for(int x = 0; x<idClientDni.size();x++){
-                        reportList = service.allReportsByIdClient(idClientDni.get(x));
-                    }
-                }else{
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                }
-
-                break;
-            case 8: //employee.lastName
-
-                List<Integer> idEmployee = service.allReportsByEmployeeLastName(filtro);
-
-                for(int x = 0; x<idEmployee.size();x++){
-                    reportList = service.allReportsByIdEmployee(idEmployee.get(x));
-                }
-
-                break;
-            case 9: //employee.dni
-
-                if(filtro.matches("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")){
-                    List<Integer> idEmployeeDni = service.allReportsByEmployeeDNI(filtro);
-
-                    for(int x = 0; x<idEmployeeDni.size();x++){
-                        reportList = service.allReportsByIdEmployee(idEmployeeDni.get(x));
-                    }
-                }else{
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-                }
-
-                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + field);
         }
-        
+
         return new ResponseEntity<>(reportList, HttpStatus.OK);
 
     }
+/*
+    @RequestMapping(path = "/reportFilter", method = RequestMethod.POST)
+    public ResponseEntity<List<Report>> getReportsByState(@RequestBody ReportFilter filtro){
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("1=1");
+
+        if(filtro.getState()!=null && filtro.getState()!=""){
+            sb.append(" AND state = '"+filtro.getState()+"'");
+        }
+        if(filtro.getPriority()!=null && filtro.getPriority()!=""){
+            sb.append(" AND priority = '"+filtro.getPriority()+"'");
+        }
+        if(filtro.getStartDate()!=null){
+            sb.append(" AND start_date = '"+filtro.getStartDate()+"'");
+        }
+        if(filtro.getEndDate()!=null){
+            sb.append(" AND ending_date = '"+filtro.getEndDate()+"'");
+        }
+        if(filtro.getAppointmentDate()!=null){
+            sb.append(" AND date_apointment = '"+filtro.getAppointmentDate()+"'");
+        }
+        if(filtro.getClientDni()!=null && filtro.getClientDni()!=""){
+            sb.append(" AND c.dni = '"+filtro.getClientDni()+"'");
+        }
+        if(filtro.getClientId()!=null && filtro.getClientId()!="") {
+            sb.append(" AND cli_id = " + filtro.getEmployeeId());
+        }
+        if(filtro.getEmployeeId()!=null && filtro.getEmployeeId()!="") {
+            sb.append(" AND emp_id = " + filtro.getEmployeeId());
+        }
+        String str = sb.toString();
+        List<Report> reportList = service.allReportsByFilters(str);
+
+        return new ResponseEntity<>(reportList, HttpStatus.OK);
+    }
+
+ */
 }
