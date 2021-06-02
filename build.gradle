@@ -18,6 +18,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-test'
 	implementation 'com.github.java-json-tools:json-patch:1.12'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

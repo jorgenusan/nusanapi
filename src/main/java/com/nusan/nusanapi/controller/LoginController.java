@@ -6,6 +6,7 @@ import com.nusan.nusanapi.service.entities.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +23,13 @@ public class LoginController {
 
         String email = login.getEmail();
         String password = login.getPassword();
-
+        BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
 
         if(!employeesService.existEmployeeByEmail(email)){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }else{
             Employees employee =  employeesService.findByEmail(email);
-            if(!employee.getPassword().equals(password)){
+            if(!encode.matches(password, employee.getPassword())){
                 return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(null);
             }else{
                 return ResponseEntity.status(HttpStatus.OK).body(login);

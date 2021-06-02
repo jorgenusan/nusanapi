@@ -6,11 +6,13 @@ import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.nusan.nusanapi.email.EmailSender;
 import com.nusan.nusanapi.model.Employees;
+import com.nusan.nusanapi.security.PasswordEncoder;
 import com.nusan.nusanapi.service.EmployeesService;
 import com.nusan.nusanapi.validate.EmployeesValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,9 @@ public class EmployeesController {
 
     @Autowired
     EmployeesValidate validate;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     /*
     @Autowired
     private JavaMailSender emailSender;*/
@@ -43,6 +48,8 @@ public class EmployeesController {
         }
 
         if(!service.existEmployeeByDni(employees.getDni())){
+            employees.setPassword(bCryptPasswordEncoder.encode(employees.getPassword()));
+
             Employees employeesCreated = service.create(employees);
             return new ResponseEntity<>(employeesCreated, HttpStatus.CREATED);
         }else{
@@ -110,8 +117,12 @@ public class EmployeesController {
         try{
             Employees employees = service.getEmployeeById(id);
             Employees employeePatch = service.applyPatchToUser(patch, employees);
+            String newPassword = bCryptPasswordEncoder.encode(employeePatch.getPassword());
+            employeePatch.setPassword(newPassword);
+
             service.create(employeePatch);
             return ResponseEntity.ok(employeePatch);
+
         }catch (JsonPatchException | JsonProcessingException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
