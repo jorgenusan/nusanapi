@@ -1,0 +1,527 @@
+{
+	"info": {
+		"_postman_id": "28523345-0115-45f1-95da-c4858c999c6d",
+		"name": "NUSAN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LogIn",
+			"item": [
+				{
+					"name": "Confirm",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"email\":\"jorge.nusan@gmail.com\",\r\n\t\"password\":\"abc123.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/forgot-password/jorge.nusan@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"forgot-password",
+								"jorge.nusan@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "All Clients",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"numPage\": 0,\r\n  \"sizePage\": 20,\r\n  \"sortBy\": \"id\",\r\n  \"ascending\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/allClients",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"allClients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client By Dni",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientDni/56693421K",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientDni",
+								"56693421K"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/client/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Cliente\",\r\n  \"lastName\": \"Palenzuela Llobet\",\r\n  \"dni\": \"99846999R\",\r\n  \"email\": \"prueba3@example.com\",\r\n  \"phoneNumber\": 658965896,\r\n  \"city\": \"Santiago\",\r\n  \"address\": \"Travessera Lorenzo, 51, 4º\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/client",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Client",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/name\",\r\n\t\t\"value\":\"new_nick3\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/lastName\",\r\n\t\t\"value\":\"new_lastName2\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/email\",\r\n\t\t\"value\":\"juanmanuelcerro@example.com\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/dni\",\r\n\t\t\"value\":\"56693421K\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/phoneNumber\",\r\n\t\t\"value\":\"246875241\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/city\",\r\n\t\t\"value\":\"Noia\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/address\",\r\n\t\t\"value\":\"Avinguda Mara, 9, 7º\"\r\n\t}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/client/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/client/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Dni",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/clientDni/72826999R",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clientDni",
+								"72826999R"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "All Employees",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/allEmployees",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"allEmployees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Employee By Dni",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/employeesDni/74805452L",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employeesDni",
+								"74805452L"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Employee By Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Employee By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/employees/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Employee",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Jorge\",\r\n  \"lastName\": \"Núñez Santiago\",\r\n  \"dni\": \"78806952M\",\r\n  \"email\": \"jorge.nusan@gmail.com\",\r\n  \"phoneNumber\": 627943192,\r\n  \"rol\": \"Admin\",\r\n  \"password\": \"Encasadechile1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/employees",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Employee",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/password\",\r\n\t\t\"value\": \"Encasadechile1\"\r\n\t}\r\n]\r\n"
+						},
+						"url": {
+							"raw": "localhost:8080/employees/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/employees/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employees",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Dni",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/employeesDni/87170626M",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employeesDni",
+								"87170626M"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "All Reports",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"numPage\": 0,\r\n  \"sizePage\": 20,\r\n  \"sortBy\": \"state\",\r\n  \"ascending\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/allReports",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"allReports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/report/12",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Report With FIlters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reportFilter/78806952M/field/9",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reportFilter",
+								"78806952M",
+								"field",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\": \"2021-05-03\",\r\n    \"endingDate\": \"\",\r\n    \"dateApointment\": \"\",\r\n    \"priority\": \"Baja\",\r\n    \"state\": \"Cerrado\",\r\n    \"machine\": \"Vitroceramica de Inducción\",\r\n    \"brand\": \"Bosch\",\r\n    \"observations\": \"\",\r\n    \"payment\": 70,\r\n    \"paymentMethod\": \"Efectivo\",\r\n    \"client\": {\r\n\t\t\t\"id\":9\r\n\t\t},\r\n    \"employees\": {\r\n\t\t\t\"id\":8\r\n\t\t}\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Report",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/startDate\",\r\n\t\t\"value\":\"2021-05-01\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/endingDate\",\r\n\t\t\"value\":\"2021-05-13\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/dateApointment\"\r\n\t\t,\"value\":\"2021-05-13\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/priority\",\r\n\t\t\"value\":\"Alta\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/state\",\r\n\t\t\"value\":\"Abierto\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/machine\",\r\n\t\t\"value\":\"Vitroceramica de Inducción\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\"\r\n\t\t,\"path\":\"/brand\",\r\n\t\t\"value\":\"Bosch\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/observations\",\r\n\t\t\"value\":\"Prueba\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\"\r\n\t\t,\"path\":\"/payment\",\r\n\t\t\"value\":\"70\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/paymentMethod\",\r\n\t\t\"value\":\"Efectivo\"\r\n\t},\r\n\t{\r\n\t\t\"op\":\"replace\",\r\n\t\t\"path\":\"/employees/id\",\r\n\t\t\"value\":\"2\"\r\n\t}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/report/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/report/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"report",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
