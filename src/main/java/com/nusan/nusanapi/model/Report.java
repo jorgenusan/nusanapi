@@ -17,7 +17,7 @@ public class Report {
     private Long id;
 
     @JsonFormat(pattern="yyyy-MM-dd")
-    @Column(name="start_date")
+    @Column(name="start_date", nullable = false)
     private Date startDate;
 
     @JsonFormat(pattern="yyyy-MM-dd")
@@ -28,13 +28,13 @@ public class Report {
     @Column(name = "date_apointment")
     private Date dateApointment;
 
-    @Column(name = "priority")
+    @Column(name = "priority", nullable = false)
     private String priority;
 
-    @Column(name = "state")
+    @Column(name = "state", nullable = false)
     private String state;
 
-    @Column(name = "machine")
+    @Column(name = "machine", nullable = false)
     private String machine;
 
     @Column(name = "brand")

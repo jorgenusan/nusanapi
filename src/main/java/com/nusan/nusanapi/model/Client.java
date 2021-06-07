@@ -16,19 +16,19 @@ public class Client {
     @Column(name="id_client")
     private Long id;
 
-    @Column(name="name_cli")
+    @Column(name="name_cli", nullable = false)
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "dni")
+    @Column(name = "dni", nullable = false)
     private String dni;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private Integer phoneNumber;
 
     @Column(name="city")
