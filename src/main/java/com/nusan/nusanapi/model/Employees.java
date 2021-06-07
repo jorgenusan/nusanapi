@@ -14,25 +14,25 @@ public class Employees {
     @Column(name = "id_employee")
     private Long id;
 
-    @Column(name = "name_emp")
+    @Column(name = "name_emp", nullable = false)
     private String name;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "dni")
+    @Column(name = "dni", nullable = false)
     private String dni;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private Integer phoneNumber;
 
-    @Column(name = "rol")
+    @Column(name = "rol", nullable = false)
     private String rol;
 
-    @Column(name = "password_emp")
+    @Column(name = "password_emp", nullable = false)
     private String password;
 
     @Override
