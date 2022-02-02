@@ -1,6 +1,10 @@
 # Nusan-api
 
-![Image text](https://github.com/jorgenusan/nusan-electron/blob/master/src/img/LogoCompleto200.png)
+<h1 align="center">
+ <div>
+  <img src="https://github.com/jorgenusan/nusan-electron/blob/master/src/img/LogoCompleto200.png">
+ </div>
+</h1>
 
  ## Table of Contents
  
