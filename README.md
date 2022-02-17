@@ -74,7 +74,7 @@ git@2.31.0 or higher
 
 The database is created through entity in the created models. If you want to modify the database, you have to modify the models and run the application.
 
-The configuration file, resources/application.propieties, contains the database connection properties: path, user, and password. If you want to point to another database, you have to change these properties
+The configuration file, [resources/application.propieties](/src/main/resources/application.properties), contains the database connection properties: `path, user, and password`. If you want to point to another database, you have to change these properties
 
 ## Test
 
@@ -89,6 +89,10 @@ The json file, utils/Insomnia_2021-05-17, contains the calls to all controllers 
 The json file, utils/NUSAN.postman_collection.json, contains the calls to all controllers for testing.
 
 [Download Postman](https://www.postman.com/downloads/)
+
+## Future Improvements
+
+Everything related to sending emails for password recovery is not ready yet.
 
 ## Author
 
