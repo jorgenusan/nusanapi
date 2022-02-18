@@ -80,13 +80,13 @@ The configuration file, [resources/application.propieties](/src/main/resources/a
 
 ### Insomia workspace
 
-The json file, utils/Insomnia_2021-05-17, contains the calls to all controllers for testing.
+The json file, [Insomnia_2021-05-17](utils/Insomnia_2021-05-17), contains the calls to all controllers for testing.
 
 [Download Insomnia](https://insomnia.rest/download)
 
 ### Postman workspace
 
-The json file, utils/NUSAN.postman_collection.json, contains the calls to all controllers for testing.
+The json file, [NUSAN.postman_collection.json](utils/NUSAN.postman_collection.json), contains the calls to all controllers for testing.
 
 [Download Postman](https://www.postman.com/downloads/)
 
