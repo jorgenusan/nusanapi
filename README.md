@@ -72,7 +72,7 @@ git@2.31.0 or higher
 
 ### MySQL Database
 
-The database is created through entity in the created models. If you want to modify the database, you have to modify the models and run the application.
+The database is created through entity in the created [models](/src/main/java/com/nusan/nusanapi/model). If you want to modify the database, you have to modify the models and run the application.
 
 The configuration file, [resources/application.propieties](/src/main/resources/application.properties), contains the database connection properties: `path, user, and password`. If you want to point to another database, you have to change these properties
 
